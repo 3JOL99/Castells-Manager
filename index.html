@@ -1,208 +1,279 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ca">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#8f2028">
+  <meta name="theme-color" content="#f0e8e3">
+  <meta name="description" content="Castells Manager: crea i gestiona la teva colla castellera.">
   <title>Castells Manager</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">EL TEU PROJECTE CASTELLER</p>
-      <h1>Castells <span>Manager</span></h1>
+  <header class="top">
+    <div class="brand">
+      <div id="headerShield" class="shield" aria-hidden="true">✦</div>
+      <div class="brand-copy">
+        <span class="eyebrow">CASTELLS MANAGER</span>
+        <h1 id="headerName">La meva colla</h1>
+        <p id="headerTown">Catalunya · Temporada 1</p>
+      </div>
+      <button id="settingsButton" class="menu-button" aria-label="Configuració">☰</button>
     </div>
-    <span class="season" id="season">Temporada 1</span>
+    <div class="top-stats">
+      <div class="top-stat"><strong id="motivationTop">60</strong><span>Motivació</span></div>
+      <div class="top-stat"><strong id="reputationTop">5</strong><span>Reputació</span></div>
+      <div class="top-stat"><strong id="rankingTop">—</strong><span>Rànquing</span></div>
+    </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div>
-        <p class="eyebrow">COMENÇA DES DE ZERO</p>
-        <h2>Construeix una colla llegendària</h2>
-        <p>Gestiona assajos, diades, finances i el creixement de la teva colla.</p>
+    <section id="page-local" class="page active">
+      <div class="hero">
+        <div class="hero-top">
+          <span class="eyebrow">EL TEU LOCAL</span>
+          <span id="seasonBadge" class="pill">Temporada 1</span>
+        </div>
+        <div class="hall">
+          <div class="lamp lamp-one"></div>
+          <div class="lamp lamp-two"></div>
+          <div class="hall-banner" id="hallBanner">LA TEVA COLLA</div>
+          <div class="crowd" aria-hidden="true">
+            <span>● ● ● ● ● ● ● ● ● ● ●</span>
+            <span>● ● ● ● ● ● ● ● ● ● ● ● ●</span>
+            <span>● ● ● ● ● ● ● ● ● ● ● ● ● ● ●</span>
+          </div>
+          <div class="hall-floor"></div>
+        </div>
+        <div class="hero-bottom">
+          <div>
+            <span class="eyebrow">DISPONIBLES</span>
+            <strong id="availableHero">24</strong>
+            <span>castellers</span>
+          </div>
+          <div>
+            <span class="eyebrow">TRESOR</span>
+            <strong id="moneyHero">1.000 €</strong>
+          </div>
+          <div>
+            <span class="eyebrow">ASSAIGS</span>
+            <strong id="practiceHero">0</strong>
+            <span>aquesta temporada</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-icon">🏰</div>
+
+      <div class="section-heading">
+        <div><span class="eyebrow">AGENDA</span><h2>La vida de la colla</h2></div>
+      </div>
+      <article class="event-card">
+        <div class="date-tile"><strong id="nextDay">15</strong><span id="nextMonth">JUN</span></div>
+        <div class="event-info">
+          <span class="eyebrow">PROPERA ACTIVITAT</span>
+          <h3 id="nextEventTitle">Assaig general</h3>
+          <p id="nextEventDescription">Prepareu els propers castells.</p>
+        </div>
+      </article>
+
+      <div class="section-heading"><div><span class="eyebrow">QUÈ FEM AVUI?</span><h2>Accions ràpides</h2></div></div>
+      <div class="action-grid">
+        <button class="action-card" data-action="practice"><span class="action-icon">↗</span><strong>Fer assaig</strong><small>Cost: 0 €</small></button>
+        <button class="action-card" data-action="recruit"><span class="action-icon">＋</span><strong>Captar gent</strong><small>Des de 100 €</small></button>
+        <button class="action-card" data-action="workshop"><span class="action-icon">€</span><strong>Taller d'empresa</strong><small>Ingressos extra</small></button>
+        <button class="action-card" data-action="grant"><span class="action-icon">★</span><strong>Subvenció</strong><small>Ajut municipal</small></button>
+      </div>
+
+      <div class="section-heading"><div><span class="eyebrow">ESTAT DE LA COLLA</span><h2>Com anem?</h2></div></div>
+      <div class="panel">
+        <div class="meter-label"><span>Motivació</span><strong id="motivationValue">60/100</strong></div>
+        <div class="meter"><span id="motivationBar"></span></div>
+        <div class="meter-label"><span>Reputació</span><strong id="reputationValue">5/100</strong></div>
+        <div class="meter"><span id="reputationBar"></span></div>
+        <div class="meter-label"><span>Progrés de temporada</span><strong id="seasonProgressValue">0%</strong></div>
+        <div class="meter"><span id="seasonProgressBar"></span></div>
+      </div>
     </section>
 
-    <section class="panel" id="setup">
-      <h2>Crea la teva colla</h2>
-      <p>Tria un nom i un poble de Catalunya.</p>
-
-      <form id="setup-form">
-        <label for="colla-name">Nom de la colla</label>
-        <input id="colla-name" maxlength="50"
-          placeholder="Ex. Castellers de la Vila" required>
-
-        <label for="town">Poble o ciutat</label>
-        <input id="town" maxlength="50"
-          placeholder="Ex. Igualada" required>
-
-        <button class="primary" type="submit">
-          Crear la meva colla
-        </button>
-      </form>
+    <section id="page-colla" class="page">
+      <div class="page-heading"><span class="eyebrow">GESTIÓ I PERSONES</span><h2>La colla</h2></div>
+      <div class="panel team-summary">
+        <div class="team-heading">
+          <div id="teamShield" class="shield big">✦</div>
+          <div><h3 id="teamName">La meva colla</h3><p id="teamSubtitle">Colla de Catalunya · Temporada 1</p></div>
+        </div>
+        <div class="team-count">
+          <div class="donut" id="teamDonut"><div><strong id="totalPeople">24</strong><span>castellers</span></div></div>
+          <div class="legend">
+            <div><i class="dot purple"></i><span>Pinya</span><strong id="pinyaCount">15</strong></div>
+            <div><i class="dot grey"></i><span>Tronc</span><strong id="troncCount">6</strong></div>
+            <div><i class="dot red"></i><span>Canalla</span><strong id="canallaCount">3</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="meter-label"><span>Motivació</span><strong id="teamMotivation">60</strong></div>
+        <div class="meter"><span id="teamMotivationBar"></span></div>
+        <div class="meter-label"><span>Reputació</span><strong id="teamReputation">5</strong></div>
+        <div class="meter"><span id="teamReputationBar"></span></div>
+      </div>
+      <div class="panel">
+        <h3>Assistència a l'assaig</h3>
+        <p class="muted">Marca qui ve avui. Només comptaran els castellers presents per als requisits de l'assaig.</p>
+        <div class="attendance-summary"><strong id="attendanceCount">24</strong><span>persones convocades i disponibles</span></div>
+        <div class="button-row">
+          <button class="button primary" id="selectAllAttendance">Tothom hi ve</button>
+          <button class="button secondary" id="selectSomeAttendance">Assistència parcial</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Captació de nous castellers</h3>
+        <p class="muted">La captació té un cost perquè cal fer difusió, imprimir fullets o organitzar activitats.</p>
+        <div class="recruit-options">
+          <button class="option-row" data-recruit="flyers"><span><strong>Fullets i cartells</strong><small>Campanya local</small></span><b>100 €</b></button>
+          <button class="option-row" data-recruit="social"><span><strong>Xarxes socials</strong><small>Difusió digital</small></span><b>180 €</b></button>
+          <button class="option-row" data-recruit="open"><span><strong>Portes obertes</strong><small>Activitat de captació</small></span><b>250 €</b></button>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Identitat de la colla</h3>
+        <button id="editIdentityButton" class="button secondary full">Personalitzar nom, poble, camisa i escut</button>
+      </div>
     </section>
 
-    <div id="game" hidden>
-      <section class="panel identity">
-        <div>
-          <p class="eyebrow">LA TEVA COLLA</p>
-          <h2 id="colla-title"></h2>
-          <p id="town-title"></p>
+    <section id="page-castells" class="page">
+      <div class="page-heading"><span class="eyebrow">REPERTORI</span><h2>Els castells</h2></div>
+      <p class="muted intro">Tria un castell per consultar-ne els requisits i intentar-lo. La gent disponible, l'experiència i la motivació afecten les possibilitats d'èxit.</p>
+      <div class="panel">
+        <h3>Disponibilitat per a l'assaig</h3>
+        <div class="meter-label"><span>Assistents marcats</span><strong id="castleAttendance">24</strong></div>
+        <p class="muted">Canvia l'assistència a la pestanya Colla.</p>
+      </div>
+      <div id="castlesList" class="castle-list"></div>
+    </section>
+
+    <section id="page-calendari" class="page">
+      <div class="page-heading"><span class="eyebrow">TEMPORADA</span><h2>Calendari</h2></div>
+      <div class="panel">
+        <h3>Properes activitats</h3>
+        <p class="muted">Els assajos són gratuïts. Les diades poden comportar despeses de transport i organització.</p>
+        <div id="calendarList" class="calendar-list"></div>
+      </div>
+      <div class="panel">
+        <h3>Organitzar una diada</h3>
+        <p class="muted">Una actuació et pot donar reputació i ingressos, però també té costos. Les despeses de viatge són provisionals en aquesta versió.</p>
+        <label for="diadaDistance">Distància aproximada d'anada (km)</label>
+        <input id="diadaDistance" type="number" min="0" max="500" value="25">
+        <label for="diadaType">Tipus d'actuació</label>
+        <select id="diadaType">
+          <option value="local">Actuació local</option>
+          <option value="near">Diada a prop</option>
+          <option value="far">Diada llunyana</option>
+        </select>
+        <div id="diadaCostPreview" class="cost-preview">Cost estimat del viatge: 75 €</div>
+        <button id="performDiadaButton" class="button primary full">Actuar a la diada</button>
+      </div>
+      <div class="panel">
+        <h3>Altres ingressos</h3>
+        <button class="button secondary full" data-action="workshop">Fer un taller d'empresa</button>
+        <button class="button secondary full spaced" data-action="grant">Sol·licitar subvenció municipal</button>
+      </div>
+    </section>
+
+    <section id="page-ranquing" class="page">
+      <div class="page-heading"><span class="eyebrow">COMPETICIÓ</span><h2>Rànquing</h2></div>
+      <div class="panel ranking-feature">
+        <span class="eyebrow">LA TEVA POSICIÓ</span>
+        <strong id="rankingPosition">—</strong>
+        <p id="rankingDescription">Fes actuacions per guanyar reputació.</p>
+      </div>
+      <div class="panel">
+        <h3>Classificació simulada</h3>
+        <p class="muted">Aquesta primera versió utilitza colles fictícies. No és una classificació oficial.</p>
+        <div id="rankingList" class="ranking-list"></div>
+      </div>
+      <div class="panel">
+        <h3>Objectiu de temporada</h3>
+        <p id="seasonGoal">Millora la colla, assaja i participa en diades.</p>
+        <button id="nextSeasonButton" class="button primary full">Començar temporada següent</button>
+      </div>
+    </section>
+
+    <section id="page-config" class="page">
+      <div class="page-heading"><span class="eyebrow">PERSONALITZACIÓ</span><h2>La teva colla</h2></div>
+      <div class="panel">
+        <label for="collaNameInput">Nom de la colla</label>
+        <input id="collaNameInput" maxlength="42" placeholder="Ex. Xiquets de la Vila">
+        <label for="townInput">Poble o ciutat</label>
+        <input id="townInput" maxlength="42" placeholder="Ex. Igualada">
+        <label for="shirtColorInput">Color de la camisa</label>
+        <div id="colorChoices" class="color-choices">
+          <button class="color-choice" data-color="#167DAD" style="--swatch:#167DAD" aria-label="Blau"></button>
+          <button class="color-choice" data-color="#B92F35" style="--swatch:#B92F35" aria-label="Vermell"></button>
+          <button class="color-choice" data-color="#7042A7" style="--swatch:#7042A7" aria-label="Lila"></button>
+          <button class="color-choice" data-color="#238653" style="--swatch:#238653" aria-label="Verd"></button>
+          <button class="color-choice" data-color="#E0B72E" style="--swatch:#E0B72E" aria-label="Groc"></button>
+          <button class="color-choice" data-color="#202434" style="--swatch:#202434" aria-label="Negre"></button>
+          <button class="color-choice" data-color="#E87528" style="--swatch:#E87528" aria-label="Taronja"></button>
+          <button class="color-choice" data-color="#FFFFFF" style="--swatch:#FFFFFF" aria-label="Blanc"></button>
         </div>
-        <div class="shirt" id="shirt">
-          👕
-          <small>BLANCA</small>
+        <input id="shirtColorInput" type="color" value="#167DAD" aria-label="Tria qualsevol color">
+        <label for="shieldStyleInput">Forma de l'escut</label>
+        <select id="shieldStyleInput">
+          <option value="split">Partit</option>
+          <option value="stripes">Franges</option>
+          <option value="horizontal">Horitzontal</option>
+          <option value="solid">Color llis</option>
+        </select>
+        <label for="shieldSymbolInput">Símbol de l'escut</label>
+        <select id="shieldSymbolInput">
+          <option value="star">Estrella</option>
+          <option value="tower">Torre</option>
+          <option value="cross">Creu</option>
+          <option value="flame">Flama</option>
+          <option value="diamond">Rombe</option>
+          <option value="none">Sense símbol</option>
+        </select>
+        <div class="identity-preview">
+          <div id="previewShield" class="shield big">✦</div>
+          <div><strong id="previewName">La meva colla</strong><p id="previewTown">Catalunya</p></div>
         </div>
-      </section>
-
-      <section class="stats">
-        <article class="panel">
-          <small>Castellers</small>
-          <strong id="members">0</strong>
-        </article>
-        <article class="panel">
-          <small>Caixa</small>
-          <strong id="money">0 €</strong>
-        </article>
-        <article class="panel">
-          <small>Prestigi</small>
-          <strong id="prestige">0</strong>
-        </article>
-        <article class="panel">
-          <small>Experiència</small>
-          <strong id="xp">0</strong>
-        </article>
-      </section>
-
-      <nav class="tabs">
-        <button class="tab active" data-tab="summary">Resum</button>
-        <button class="tab" data-tab="training">Assajos</button>
-        <button class="tab" data-tab="events">Diades</button>
-        <button class="tab" data-tab="finance">Finances</button>
-      </nav>
-
-      <section class="panel page" id="page-summary">
-        <div class="between">
-          <h2>Centre de comandament</h2>
-          <span class="badge" id="level">Nova colla</span>
-        </div>
-
-        <p id="status">
-          Comença a fer créixer la teva colla!
-        </p>
-
-        <div class="progress-box">
-          <div class="between">
-            <strong>Objectiu: camisa de color</strong>
-            <span id="progress-text">0%</span>
-          </div>
-          <div class="progress">
-            <div id="progress-bar"></div>
-          </div>
-          <p class="hint">
-            Completa 10 assajos, 4 diades i conserva almenys 900 €
-            per desbloquejar la camisa de color dins del joc.
-          </p>
-        </div>
-
-        <div class="actions">
-          <button class="primary" id="recruit">
-            Captar castellers · 120 €
-          </button>
-          <button id="next-season">Passar de temporada</button>
-        </div>
-
-        <h3>Activitat recent</h3>
-        <ul id="activity-log"></ul>
-      </section>
-
-      <section class="panel page" id="page-training" hidden>
-        <h2>Assajos</h2>
-        <p>La constància millora l'experiència i el prestigi.</p>
-
-        <div class="item">
-          <div>
-            <strong>Assaig general</strong>
-            <p>Cost: 40 € · +8 experiència</p>
-          </div>
-          <button class="primary" id="practice">Fer assaig</button>
-        </div>
-
-        <div class="item">
-          <div>
-            <strong>Taller amb una empresa</strong>
-            <p>Una activitat per finançar la colla · +350 €</p>
-          </div>
-          <button id="workshop">Organitzar taller</button>
-        </div>
-
-        <p>Assajos fets: <strong id="practice-count">0</strong></p>
-      </section>
-
-      <section class="panel page" id="page-events" hidden>
-        <h2>Diades</h2>
-        <p>
-          Les actuacions donen prestigi, però també tenen despeses.
-        </p>
-
-        <div class="item">
-          <div>
-            <strong>Diada propera</strong>
-            <p>Cost estimat: 180 €</p>
-          </div>
-          <button class="primary" id="local-event">Participar</button>
-        </div>
-
-        <div class="item">
-          <div>
-            <strong>Diada llunyana</strong>
-            <p>Cost estimat: 420 €, inclòs un autocar simulat</p>
-          </div>
-          <button id="far-event">Participar</button>
-        </div>
-
-        <p>Diades fetes: <strong id="event-count">0</strong></p>
-        <p class="hint">
-          Els costos són valors ficticis del prototip, no tarifes reals.
-        </p>
-      </section>
-
-      <section class="panel page" id="page-finance" hidden>
-        <h2>Finances i local</h2>
-
-        <div class="item">
-          <div>
-            <strong>Ajut municipal</strong>
-            <p>Subvenció simulada de 500 € per temporada.</p>
-          </div>
-          <button id="grant">Sol·licitar ajut</button>
-        </div>
-
-        <div class="item">
-          <div>
-            <strong>Millorar el local</strong>
-            <p>Cost: 600 € · +12 prestigi</p>
-          </div>
-          <button id="upgrade">Millorar local</button>
-        </div>
-
-        <p>Ingressos: <strong id="income">0 €</strong></p>
-        <p>Despeses: <strong id="expenses">0 €</strong></p>
-
-        <button class="danger" id="reset">Reiniciar partida</button>
-      </section>
-    </div>
-
-    <footer>
-      Castells Manager · Prototip en desenvolupament
-    </footer>
+        <button id="saveIdentityButton" class="button primary full">Desar identitat</button>
+      </div>
+      <div class="panel">
+        <h3>Partida</h3>
+        <p class="muted">La partida es desa en aquest navegador. Si esborres les dades del navegador, pots perdre la partida.</p>
+        <button id="exportSaveButton" class="button secondary full">Exportar partida</button>
+        <button id="resetGameButton" class="button danger full spaced">Reiniciar partida</button>
+      </div>
+    </section>
   </main>
 
-  <div id="toast" role="status" aria-live="polite"></div>
+  <nav class="bottom-nav" aria-label="Navegació principal">
+    <button class="nav-item active" data-tab="local"><span class="nav-icon">▤</span><span>Local</span></button>
+    <button class="nav-item" data-tab="colla"><span class="nav-icon">♟</span><span>Colla</span></button>
+    <button class="nav-item" data-tab="castells"><span class="nav-icon">▱</span><span>Castells</span></button>
+    <button class="nav-item" data-tab="calendari"><span class="nav-icon">▦</span><span>Calendari</span></button>
+    <button class="nav-item" data-tab="ranquing"><span class="nav-icon">▥</span><span>Rànquing</span></button>
+  </nav>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="attendanceDialog">
+    <div class="dialog-heading"><h2>Assistència a l'assaig</h2><button class="close-dialog" data-close="attendanceDialog" aria-label="Tancar">×</button></div>
+    <p class="muted">Quants castellers vindran a l'assaig d'avui?</p>
+    <label for="attendanceSlider">Assistents previstos</label>
+    <input id="attendanceSlider" type="range" min="0" max="100" value="24">
+    <div class="attendance-big"><strong id="attendanceSliderValue">24</strong><span>persones</span></div>
+    <p class="muted">Aquesta versió representa l'assistència amb un recompte. Més endavant podem fer una llista individual de castellers i posicions.</p>
+    <button id="saveAttendanceButton" class="button primary full">Desar assistència</button>
+  </dialog>
+
+  <dialog id="castleDialog">
+    <div class="dialog-heading"><h2 id="castleDialogTitle">Castell</h2><button class="close-dialog" data-close="castleDialog" aria-label="Tancar">×</button></div>
+    <div id="castleDialogBody"></div>
+    <button id="attemptCastleButton" class="button primary full">Intentar aquest castell</button>
+  </dialog>
+
   <script src="app.js"></script>
 </body>
 </html>
