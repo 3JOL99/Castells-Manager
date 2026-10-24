@@ -1,0 +1,208 @@
+
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8f2028">
+  <title>Castells Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">EL TEU PROJECTE CASTELLER</p>
+      <h1>Castells <span>Manager</span></h1>
+    </div>
+    <span class="season" id="season">Temporada 1</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">COMENÇA DES DE ZERO</p>
+        <h2>Construeix una colla llegendària</h2>
+        <p>Gestiona assajos, diades, finances i el creixement de la teva colla.</p>
+      </div>
+      <div class="hero-icon">🏰</div>
+    </section>
+
+    <section class="panel" id="setup">
+      <h2>Crea la teva colla</h2>
+      <p>Tria un nom i un poble de Catalunya.</p>
+
+      <form id="setup-form">
+        <label for="colla-name">Nom de la colla</label>
+        <input id="colla-name" maxlength="50"
+          placeholder="Ex. Castellers de la Vila" required>
+
+        <label for="town">Poble o ciutat</label>
+        <input id="town" maxlength="50"
+          placeholder="Ex. Igualada" required>
+
+        <button class="primary" type="submit">
+          Crear la meva colla
+        </button>
+      </form>
+    </section>
+
+    <div id="game" hidden>
+      <section class="panel identity">
+        <div>
+          <p class="eyebrow">LA TEVA COLLA</p>
+          <h2 id="colla-title"></h2>
+          <p id="town-title"></p>
+        </div>
+        <div class="shirt" id="shirt">
+          👕
+          <small>BLANCA</small>
+        </div>
+      </section>
+
+      <section class="stats">
+        <article class="panel">
+          <small>Castellers</small>
+          <strong id="members">0</strong>
+        </article>
+        <article class="panel">
+          <small>Caixa</small>
+          <strong id="money">0 €</strong>
+        </article>
+        <article class="panel">
+          <small>Prestigi</small>
+          <strong id="prestige">0</strong>
+        </article>
+        <article class="panel">
+          <small>Experiència</small>
+          <strong id="xp">0</strong>
+        </article>
+      </section>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="summary">Resum</button>
+        <button class="tab" data-tab="training">Assajos</button>
+        <button class="tab" data-tab="events">Diades</button>
+        <button class="tab" data-tab="finance">Finances</button>
+      </nav>
+
+      <section class="panel page" id="page-summary">
+        <div class="between">
+          <h2>Centre de comandament</h2>
+          <span class="badge" id="level">Nova colla</span>
+        </div>
+
+        <p id="status">
+          Comença a fer créixer la teva colla!
+        </p>
+
+        <div class="progress-box">
+          <div class="between">
+            <strong>Objectiu: camisa de color</strong>
+            <span id="progress-text">0%</span>
+          </div>
+          <div class="progress">
+            <div id="progress-bar"></div>
+          </div>
+          <p class="hint">
+            Completa 10 assajos, 4 diades i conserva almenys 900 €
+            per desbloquejar la camisa de color dins del joc.
+          </p>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="recruit">
+            Captar castellers · 120 €
+          </button>
+          <button id="next-season">Passar de temporada</button>
+        </div>
+
+        <h3>Activitat recent</h3>
+        <ul id="activity-log"></ul>
+      </section>
+
+      <section class="panel page" id="page-training" hidden>
+        <h2>Assajos</h2>
+        <p>La constància millora l'experiència i el prestigi.</p>
+
+        <div class="item">
+          <div>
+            <strong>Assaig general</strong>
+            <p>Cost: 40 € · +8 experiència</p>
+          </div>
+          <button class="primary" id="practice">Fer assaig</button>
+        </div>
+
+        <div class="item">
+          <div>
+            <strong>Taller amb una empresa</strong>
+            <p>Una activitat per finançar la colla · +350 €</p>
+          </div>
+          <button id="workshop">Organitzar taller</button>
+        </div>
+
+        <p>Assajos fets: <strong id="practice-count">0</strong></p>
+      </section>
+
+      <section class="panel page" id="page-events" hidden>
+        <h2>Diades</h2>
+        <p>
+          Les actuacions donen prestigi, però també tenen despeses.
+        </p>
+
+        <div class="item">
+          <div>
+            <strong>Diada propera</strong>
+            <p>Cost estimat: 180 €</p>
+          </div>
+          <button class="primary" id="local-event">Participar</button>
+        </div>
+
+        <div class="item">
+          <div>
+            <strong>Diada llunyana</strong>
+            <p>Cost estimat: 420 €, inclòs un autocar simulat</p>
+          </div>
+          <button id="far-event">Participar</button>
+        </div>
+
+        <p>Diades fetes: <strong id="event-count">0</strong></p>
+        <p class="hint">
+          Els costos són valors ficticis del prototip, no tarifes reals.
+        </p>
+      </section>
+
+      <section class="panel page" id="page-finance" hidden>
+        <h2>Finances i local</h2>
+
+        <div class="item">
+          <div>
+            <strong>Ajut municipal</strong>
+            <p>Subvenció simulada de 500 € per temporada.</p>
+          </div>
+          <button id="grant">Sol·licitar ajut</button>
+        </div>
+
+        <div class="item">
+          <div>
+            <strong>Millorar el local</strong>
+            <p>Cost: 600 € · +12 prestigi</p>
+          </div>
+          <button id="upgrade">Millorar local</button>
+        </div>
+
+        <p>Ingressos: <strong id="income">0 €</strong></p>
+        <p>Despeses: <strong id="expenses">0 €</strong></p>
+
+        <button class="danger" id="reset">Reiniciar partida</button>
+      </section>
+    </div>
+
+    <footer>
+      Castells Manager · Prototip en desenvolupament
+    </footer>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
